@@ -18,6 +18,8 @@
 		C144263B2EB2849D0017C505 /* ReservationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C144263A2EB2849D0017C505 /* ReservationViewModel.swift */; };
 		C14426412EB6B2F00017C505 /* MainHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14426402EB6B2F00017C505 /* MainHomeView.swift */; };
 		C14426442EB6B3830017C505 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14426432EB6B3830017C505 /* ProfileView.swift */; };
+		C14426462EB6BD3D0017C505 /* ReservationsAvailable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14426452EB6BD3D0017C505 /* ReservationsAvailable.swift */; };
+		C14426482EB6BF090017C505 /* ReservationsAvailableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14426472EB6BF090017C505 /* ReservationsAvailableViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +35,8 @@
 		C144263A2EB2849D0017C505 /* ReservationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationViewModel.swift; sourceTree = "<group>"; };
 		C14426402EB6B2F00017C505 /* MainHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainHomeView.swift; sourceTree = "<group>"; };
 		C14426432EB6B3830017C505 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		C14426452EB6BD3D0017C505 /* ReservationsAvailable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationsAvailable.swift; sourceTree = "<group>"; };
+		C14426472EB6BF090017C505 /* ReservationsAvailableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationsAvailableViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,6 +160,8 @@
 			children = (
 				C14426382EB27E6A0017C505 /* ReservationView.swift */,
 				C144263A2EB2849D0017C505 /* ReservationViewModel.swift */,
+				C14426452EB6BD3D0017C505 /* ReservationsAvailable.swift */,
+				C14426472EB6BF090017C505 /* ReservationsAvailableViewModel.swift */,
 			);
 			path = screens;
 			sourceTree = "<group>";
@@ -238,6 +244,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C14426482EB6BF090017C505 /* ReservationsAvailableViewModel.swift in Sources */,
+				C14426462EB6BD3D0017C505 /* ReservationsAvailable.swift in Sources */,
 				C14426302EB27BF80017C505 /* Customer.swift in Sources */,
 				C14426362EB27DDB0017C505 /* Profile.swift in Sources */,
 				C14426442EB6B3830017C505 /* ProfileView.swift in Sources */,

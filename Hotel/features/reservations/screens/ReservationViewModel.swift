@@ -15,6 +15,7 @@ final class ReservationViewModel: ObservableObject{
     @Published var checkIn : Date
     @Published var checkOut : Date
     
+    @Published var searchReservation = false
     
     var allowedRange :ClosedRange<Date>{minDate...maxDate}
     
@@ -56,7 +57,7 @@ final class ReservationViewModel: ObservableObject{
     }
     
     func navigateToSearch(){
-        
+        searchReservation=true
     }
     
     func setCheckIn(_ date:Date){

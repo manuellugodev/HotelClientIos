@@ -9,13 +9,14 @@ import SwiftUI
 
 struct ReservationView: View {
     @StateObject private var vm = ReservationViewModel()
+    @State private var navigateToReservations = false
+
     var body: some View {
-        NavigationView{
             VStack(spacing:0){
                 ReservationFieldView(vm:vm)
                 
                 Divider()
-                Button(action: vm.navigateToSearch) {
+                Button(action: {navigateToReservations=true}) {
                     Label("Search", systemImage: "magnifyingglass")
                 }
                 .buttonStyle(.borderedProminent)
@@ -26,8 +27,10 @@ struct ReservationView: View {
             .padding(.top,30)
             .padding(.horizontal,20)
             .navigationTitle("Scheduled Reservation")
-            
-        }
+            .navigationDestination(isPresented: $navigateToReservations){
+                ReservationsAvailableView()
+            }
+        
         
     }
 }

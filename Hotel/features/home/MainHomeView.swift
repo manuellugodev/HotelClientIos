@@ -11,20 +11,24 @@ import SwiftUI
 struct MainHomeView: View {
     var body: some View {
         TabView {
-            HomeTabView()
-                .tabItem {
-                    Label("Home", systemImage: "house.fill")
-                }
             
-            ReservationsTabView()
-                .tabItem {
-                    Label("My Reservations", systemImage: "calendar")
-                }
+            NavigationStack(){
+                HomeTabView()
+            }.tabItem { Label("Home", systemImage: "house.fill")}
+          
             
-            ProfileTabView()
-                .tabItem {
-                    Label("Profile", systemImage: "person.fill")
-                }
+            NavigationStack(){
+                ReservationsTabView()
+            }.tabItem {
+                Label("My Reservations", systemImage: "calendar")
+            }
+                
+            NavigationStack(){
+                ProfileTabView()
+            }.tabItem {
+                Label("Profile", systemImage: "person.fill")
+            }
+                
         }
     }
 }
@@ -50,7 +54,6 @@ struct ProfileTabView: View {
     var body: some View {
     
         ProfileView()
-        
     }
 }
 
