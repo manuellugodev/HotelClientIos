@@ -10,24 +10,30 @@ import SwiftUI
 struct ReservationView: View {
     @StateObject private var vm = ReservationViewModel()
     var body: some View {
-        
-        VStack(spacing:0){
-            ReservationFieldView()
-        }
-        .padding(.top,30)
-        .padding(.horizontal,20)
-        
-        Divider()
-        Button(action: vm.navigateToSearch) {
-            Label("Search", systemImage: "magnifyingglass")
-        }
-        .buttonStyle(.borderedProminent)
+        NavigationView{
+            VStack(spacing:0){
+                ReservationFieldView(vm:vm)
+                
+                Divider()
+                Button(action: vm.navigateToSearch) {
+                    Label("Search", systemImage: "magnifyingglass")
+                }
+                .buttonStyle(.borderedProminent)
+                .padding(.top,10)
+                
+                Spacer()
+            }
+            .padding(.top,30)
+            .padding(.horizontal,20)
+            .navigationTitle("Scheduled Reservation")
             
+        }
+        
     }
 }
 
 struct ReservationFieldView:View{
-    @StateObject private var vm = ReservationViewModel()
+    @StateObject var vm:ReservationViewModel ;
     
     private enum ActiveSheet: Identifiable {
         case guests, checkInDate,checkOutDate

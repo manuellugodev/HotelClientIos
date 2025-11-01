@@ -12,6 +12,7 @@ struct HotelApp: App {
     var body: some Scene {
         WindowGroup {
             
+            MainHomeView()
             //ReservationView()
             //Spacer()
         }
