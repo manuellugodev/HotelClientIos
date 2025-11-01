@@ -20,6 +20,7 @@
 		C14426442EB6B3830017C505 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14426432EB6B3830017C505 /* ProfileView.swift */; };
 		C14426462EB6BD3D0017C505 /* ReservationsAvailable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14426452EB6BD3D0017C505 /* ReservationsAvailable.swift */; };
 		C14426482EB6BF090017C505 /* ReservationsAvailableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14426472EB6BF090017C505 /* ReservationsAvailableViewModel.swift */; };
+		C144264A2EB6CE640017C505 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14426492EB6CE640017C505 /* ProfileViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +38,7 @@
 		C14426432EB6B3830017C505 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		C14426452EB6BD3D0017C505 /* ReservationsAvailable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationsAvailable.swift; sourceTree = "<group>"; };
 		C14426472EB6BF090017C505 /* ReservationsAvailableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationsAvailableViewModel.swift; sourceTree = "<group>"; };
+		C14426492EB6CE640017C505 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -170,6 +172,7 @@
 			isa = PBXGroup;
 			children = (
 				C14426432EB6B3830017C505 /* ProfileView.swift */,
+				C14426492EB6CE640017C505 /* ProfileViewModel.swift */,
 			);
 			path = profile;
 			sourceTree = "<group>";
@@ -250,6 +253,7 @@
 				C14426362EB27DDB0017C505 /* Profile.swift in Sources */,
 				C14426442EB6B3830017C505 /* ProfileView.swift in Sources */,
 				C14426392EB27E6A0017C505 /* ReservationView.swift in Sources */,
+				C144264A2EB6CE640017C505 /* ProfileViewModel.swift in Sources */,
 				C144263B2EB2849D0017C505 /* ReservationViewModel.swift in Sources */,
 				C14426412EB6B2F00017C505 /* MainHomeView.swift in Sources */,
 				C14426322EB27C3E0017C505 /* Reservation.swift in Sources */,

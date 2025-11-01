@@ -7,12 +7,11 @@
 
 import SwiftUI
 struct ProfileView: View {
-    @State private var name: String = "John Doe"
-    @State private var email: String = "john.doe@email.com"
-    @State private var phone: String = "+1 234 567 8900"
     
+    @StateObject private var vm = ProfileViewModel()
     var body: some View {
         VStack(spacing: 30) {
+            if(!vm.showLoader){
             // Profile Image
             Circle()
                 .fill(Color.blue.opacity(0.2))
@@ -31,9 +30,10 @@ struct ProfileView: View {
                     Text("Name")
                         .font(.subheadline)
                         .foregroundColor(.secondary)
-                    TextField("Enter your name", text: $name)
+                    TextField("Enter your name", text: $vm.name)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                         .autocapitalization(.words)
+                        .disabled(true)
                 }
                 
                 // Email Field
@@ -41,10 +41,11 @@ struct ProfileView: View {
                     Text("Email")
                         .font(.subheadline)
                         .foregroundColor(.secondary)
-                    TextField("Enter your email", text: $email)
+                    TextField("Enter your email", text: $vm.email)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                         .autocapitalization(.none)
                         .keyboardType(.emailAddress)
+                        .disabled(true)
                 }
                 
                 // Phone Field
@@ -52,9 +53,10 @@ struct ProfileView: View {
                     Text("Phone")
                         .font(.subheadline)
                         .foregroundColor(.secondary)
-                    TextField("Enter your phone", text: $phone)
+                    TextField("Enter your phone", text: $vm.phone)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                         .keyboardType(.phonePad)
+                        .disabled(true)
                 }
             }
             .padding(.horizontal, 30)
@@ -76,9 +78,16 @@ struct ProfileView: View {
             }
             .padding(.horizontal, 30)
             .padding(.bottom, 40)
+                
+            }else{
+                ProgressView("Loading Profile")
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+
+            }
         }
+        .navigationTitle("Profile")        
         .background(Color(.systemGroupedBackground))
-        .navigationTitle("Profile")
+
     }
 }
 
