@@ -11,8 +11,23 @@ import SwiftUI
 // MARK: - ViewModel
 // MARK: - Main View
 struct RoomsAvailableView: View {
-    @StateObject private var viewModel = DependencyContainer.shared.makeRoomsViewModel()
-    
+    let checkIn: Date
+    let checkOut: Date
+    let guests: Int
+
+    @StateObject private var viewModel: RoomsAvailableViewModel
+
+    init(checkIn: Date, checkOut: Date, guests: Int) {
+        self.checkIn = checkIn
+        self.checkOut = checkOut
+        self.guests = guests
+        _viewModel = StateObject(wrappedValue: DependencyContainer.shared.makeRoomsViewModel(
+            checkIn: checkIn,
+            checkOut: checkOut,
+            guests: guests
+        ))
+    }
+
     var body: some View {
             ZStack {
                 if viewModel.isLoading {
@@ -123,11 +138,5 @@ struct RoomCardView: View {
         .background(Color.white)
         .cornerRadius(12)
         .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 2)
-    }
-}
-// MARK: - Preview
-struct ReservationsAvailableView_Previews: PreviewProvider {
-    static var previews: some View {
-        RoomsAvailableView()
     }
 }

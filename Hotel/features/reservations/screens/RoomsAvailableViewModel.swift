@@ -11,26 +11,38 @@ class RoomsAvailableViewModel: ObservableObject {
     @Published var isLoading: Bool = false
 
     let getRoomsAvailables:GetRoomsAvailables
-    
-    init(source:GetRoomsAvailables) {
+    private let checkInDate: Date
+    private let checkOutDate: Date
+    private let guests: Int
+
+    init(source:GetRoomsAvailables, checkIn: Date, checkOut: Date, guests: Int) {
         self.getRoomsAvailables = source
+        self.checkInDate = checkIn
+        self.checkOutDate = checkOut
+        self.guests = guests
         loadRooms()
     }
-    
+
     func loadRooms() {
         isLoading = true
-        
+
+        // Format dates to API format (yyyy-MM-dd)
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let checkInString = dateFormatter.string(from: checkInDate)
+        let checkOutString = dateFormatter.string(from: checkOutDate)
+
         Task {
-            let result = await getRoomsAvailables.execute("2025-09-03","2025-09-06",1)
-            
+            let result = await getRoomsAvailables.execute(checkInString, checkOutString, guests)
+
             switch result {
             case .success(let fetchedRooms):
                 self.rooms = fetchedRooms
                 self.isLoading = false
-                
+
             case .failure(let error):
                 self.isLoading = false
-                
+                print("Error loading rooms: \(error.message)")
                 self.rooms = []
             }
         }

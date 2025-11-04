@@ -9,7 +9,7 @@ import Foundation
 
 @MainActor
 final class ReservationViewModel: ObservableObject{
-    @Published var adults = 0
+    @Published var adults = 1
     @Published var children = 0
     
     @Published var checkIn : Date

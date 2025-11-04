@@ -29,8 +29,13 @@ class DependencyContainer {
         return GetRoomsAvailablesInteractor(repositoryRoom: makeRoomsRepository())
     }
 
-    func makeRoomsViewModel() -> RoomsAvailableViewModel {
-        return RoomsAvailableViewModel(source:makeGetRoomsAvailablesUseCase())
+    func makeRoomsViewModel(checkIn: Date, checkOut: Date, guests: Int) -> RoomsAvailableViewModel {
+        return RoomsAvailableViewModel(
+            source: makeGetRoomsAvailablesUseCase(),
+            checkIn: checkIn,
+            checkOut: checkOut,
+            guests: guests
+        )
     }
 
     // MARK: - Authentication

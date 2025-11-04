@@ -14,24 +14,28 @@ struct ReservationView: View {
     var body: some View {
             VStack(spacing:0){
                 ReservationFieldView(vm:vm)
-                
+
                 Divider()
                 Button(action: {navigateToReservations=true}) {
                     Label("Search", systemImage: "magnifyingglass")
                 }
                 .buttonStyle(.borderedProminent)
                 .padding(.top,10)
-                
+
                 Spacer()
             }
             .padding(.top,30)
             .padding(.horizontal,20)
             .navigationTitle("Scheduled Reservation")
             .navigationDestination(isPresented: $navigateToReservations){
-                RoomsAvailableView()
+                RoomsAvailableView(
+                    checkIn: vm.checkIn,
+                    checkOut: vm.checkOut,
+                    guests: vm.totalGuests
+                )
             }
-        
-        
+
+
     }
 }
 
