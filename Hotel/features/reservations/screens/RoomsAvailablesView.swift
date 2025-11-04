@@ -53,25 +53,43 @@ struct RoomCardView: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
-            // Image Section
-            ZStack {
-                Rectangle()
-                    .fill(Color.gray.opacity(0.3))
+            // Image Section - Remote Image Loading
+            AsyncImage(url: URL(string: room.pathImage)) { phase in
+                switch phase {
+                case .empty:
+                    // Loading state
+                    ZStack {
+                        Rectangle()
+                            .fill(Color.gray.opacity(0.3))
+                        ProgressView()
+                            .scaleEffect(1.5)
+                    }
                     .frame(height: 200)
-                
-                // Use your actual image from assets
-                Image(room.pathImage)
-                    .resizable()
-                    .scaledToFill()
+
+                case .success(let image):
+                    // Successfully loaded image
+                    image
+                        .resizable()
+                        .scaledToFill()
+                        .frame(height: 200)
+                        .clipped()
+
+                case .failure:
+                    // Failed to load - show fallback
+                    ZStack {
+                        Rectangle()
+                            .fill(Color.gray.opacity(0.2))
+                        Image(systemName: "bed.double.fill")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 80, height: 80)
+                            .foregroundColor(.gray.opacity(0.5))
+                    }
                     .frame(height: 200)
-                    .clipped()
-                
-                // Fallback to SF Symbol if image doesn't exist
-                Image(systemName: "bed.double.fill")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 80, height: 80)
-                    .foregroundColor(.gray.opacity(0.5))
+
+                @unknown default:
+                    EmptyView()
+                }
             }
             .frame(height: 200)
             .clipped()

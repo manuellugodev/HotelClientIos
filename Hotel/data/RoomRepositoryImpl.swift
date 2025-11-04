@@ -33,8 +33,16 @@ class RoomRepositoryImpl:RoomRepository{
     }
     
     func toRoomsDomain(roomsSource:[RoomApi])-> [RoomHotel]{
-        
-        return []
+        return roomsSource.map { roomApi in
+            RoomHotel(
+                id: Int64(roomApi.id),
+                description: roomApi.description,
+                roomType: roomApi.roomType,
+                pathImage: roomApi.image,
+                peopleQuantity: roomApi.capacity,
+                price: roomApi.price
+            )
+        }
     }
     
 }

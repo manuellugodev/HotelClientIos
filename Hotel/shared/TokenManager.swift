@@ -17,7 +17,8 @@ class TokenManager {
     private let refreshTokenKey = "refreshToken"
     
     private init() {
-        saveToken("sada")
+        // Hardcoded token for testing - TODO: Remove in production
+        saveToken("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtYW51ZWwiLCJpYXQiOjE3NjIyODE1NzIsImV4cCI6MTc2MjM2Nzk3Mn0.03TDMXPrXNfyovdt_9LqePyWdeVof5XvbbLtmQKdf1M")
     }
     
     // MARK: - Save Token
