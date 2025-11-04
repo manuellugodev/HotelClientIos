@@ -9,10 +9,11 @@ import Foundation
 
 struct Reservation{
     let id:Int
-    let client:Customer
+    let guest:Customer
     let roomHotel:RoomHotel
     let checkIn:Int64
     let checkOut:Int64
+    let purpose:String
     let price:Double
     let taxPrice:Double
     let totalPrice:Double
