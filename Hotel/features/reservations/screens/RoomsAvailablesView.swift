@@ -7,19 +7,11 @@
 
 import SwiftUI
 
-// MARK: - Model
-struct Room: Identifiable {
-    let id: UUID
-    let imageName: String
-    let roomType: String
-    let capacity: Int
-    let price: Double
-}
 
 // MARK: - ViewModel
 // MARK: - Main View
-struct ReservationsAvailableView: View {
-    @StateObject private var viewModel = ReservationsAvailableViewModel()
+struct RoomsAvailableView: View {
+    @StateObject private var viewModel = DependencyContainer.shared.makeRoomsViewModel()
     
     var body: some View {
             ZStack {
@@ -118,6 +110,6 @@ struct RoomCardView: View {
 // MARK: - Preview
 struct ReservationsAvailableView_Previews: PreviewProvider {
     static var previews: some View {
-        ReservationsAvailableView()
+        RoomsAvailableView()
     }
 }
