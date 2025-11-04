@@ -9,12 +9,17 @@ import SwiftUI
 
 @main
 struct HotelApp: App {
+    @StateObject private var authManager = AuthenticationManager()
+
     var body: some Scene {
         WindowGroup {
-            
-            MainHomeView()
-            //ReservationView()
-            //Spacer()
+            if authManager.isAuthenticated {
+                MainHomeView()
+                    .environmentObject(authManager)
+            } else {
+                LoginView()
+                    .environmentObject(authManager)
+            }
         }
     }
 }

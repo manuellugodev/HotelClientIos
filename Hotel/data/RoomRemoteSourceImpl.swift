@@ -8,13 +8,12 @@
 import Foundation
 
 class RoomRemoteSourceImpl:RoomRemoteSource{
-    
-    private let baseURL = "https://hotel.manuellugo.dev"
+
     private let networkManager : BaseNetworkManager
-       
-    init(baseURL: String = "https://hotel.manuellugo.dev") {
-            self.networkManager = BaseNetworkManager(baseURL: baseURL)
-        }
+
+    init(networkManager: BaseNetworkManager) {
+        self.networkManager = networkManager
+    }
         
     
     func getRoomsAvailable(startDate: String, endDate: String, guests: Int) async throws -> [RoomApi] {

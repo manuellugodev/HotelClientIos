@@ -13,11 +13,13 @@ class ProfileViewModel:ObservableObject{
       @Published var phone: String = ""
       @Published var showLogoutAlert: Bool = false
       @Published var showLoader = true
-      
+
+    var onLogout: (() -> Void)?
+
     init() {
         loadProfile()
     }
-    
+
     func loadProfile(){
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             self.name = "Manuel Lugo"
@@ -26,15 +28,14 @@ class ProfileViewModel:ObservableObject{
             self.showLoader = false
         }
     }
-    
-    
+
+
       func logout() {
           showLogoutAlert = true
       }
-      
+
       func confirmLogout() {
-          // Logout logic here
           print("User logged out")
-          // Later: Clear tokens, navigate to login, etc.
+          onLogout?()
       }
   }

@@ -34,6 +34,16 @@
 		C144266C2EB99E1A0017C505 /* ApiResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C144266B2EB99E1A0017C505 /* ApiResponse.swift */; };
 		C144266E2EB99FD20017C505 /* DependencyContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C144266D2EB99FD20017C505 /* DependencyContainer.swift */; };
 		C14426702EB9A4F00017C505 /* TokenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C144266F2EB9A4F00017C505 /* TokenManager.swift */; };
+		C14426722EBA8D150017C505 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14426712EBA8D150017C505 /* User.swift */; };
+		C14426742EBA8D400017C505 /* LoginUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14426732EBA8D400017C505 /* LoginUseCase.swift */; };
+		C14426762EBA8D650017C505 /* AuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14426752EBA8D650017C505 /* AuthRepository.swift */; };
+		C14426782EBA8D8B0017C505 /* AuthRemoteDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14426772EBA8D8B0017C505 /* AuthRemoteDataSource.swift */; };
+		C144267A2EBA8E220017C505 /* AuthRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14426792EBA8E220017C505 /* AuthRepositoryImpl.swift */; };
+		C144267C2EBA8E2D0017C505 /* AuthRemoteDataSourceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C144267B2EBA8E2D0017C505 /* AuthRemoteDataSourceImpl.swift */; };
+		C144267E2EBA8E440017C505 /* LoginApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C144267D2EBA8E440017C505 /* LoginApi.swift */; };
+		C14426822EBA8EB80017C505 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14426812EBA8EB80017C505 /* LoginView.swift */; };
+		C14426862EBA8EF10017C505 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14426852EBA8EF10017C505 /* LoginViewModel.swift */; };
+		C14426882EBA8F130017C505 /* AuthenticationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14426872EBA8F130017C505 /* AuthenticationManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -65,6 +75,16 @@
 		C144266B2EB99E1A0017C505 /* ApiResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiResponse.swift; sourceTree = "<group>"; };
 		C144266D2EB99FD20017C505 /* DependencyContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyContainer.swift; sourceTree = "<group>"; };
 		C144266F2EB9A4F00017C505 /* TokenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenManager.swift; sourceTree = "<group>"; };
+		C14426712EBA8D150017C505 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		C14426732EBA8D400017C505 /* LoginUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginUseCase.swift; sourceTree = "<group>"; };
+		C14426752EBA8D650017C505 /* AuthRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthRepository.swift; sourceTree = "<group>"; };
+		C14426772EBA8D8B0017C505 /* AuthRemoteDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthRemoteDataSource.swift; sourceTree = "<group>"; };
+		C14426792EBA8E220017C505 /* AuthRepositoryImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthRepositoryImpl.swift; sourceTree = "<group>"; };
+		C144267B2EBA8E2D0017C505 /* AuthRemoteDataSourceImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthRemoteDataSourceImpl.swift; sourceTree = "<group>"; };
+		C144267D2EBA8E440017C505 /* LoginApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginApi.swift; sourceTree = "<group>"; };
+		C14426812EBA8EB80017C505 /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		C14426852EBA8EF10017C505 /* LoginViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginViewModel.swift; path = auth/LoginViewModel.swift; sourceTree = "<group>"; };
+		C14426872EBA8F130017C505 /* AuthenticationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +140,7 @@
 		C14426272EAD30D40017C505 /* features */ = {
 			isa = PBXGroup;
 			children = (
+				C14426842EBA8ECB0017C505 /* auth */,
 				C14426422EB6B35B0017C505 /* profile */,
 				C144262A2EAD30FD0017C505 /* reservations */,
 				C14426292EAD30F40017C505 /* rooms */,
@@ -154,6 +175,7 @@
 		C144262B2EAD31200017C505 /* domain */ = {
 			isa = PBXGroup;
 			children = (
+				C14426712EBA8D150017C505 /* User.swift */,
 				C14426592EB6FD490017C505 /* usecases */,
 				C14426522EB6F69B0017C505 /* datasource */,
 				C144264B2EB6F5700017C505 /* repository */,
@@ -168,6 +190,8 @@
 		C144262C2EAD31290017C505 /* data */ = {
 			isa = PBXGroup;
 			children = (
+				C144267B2EBA8E2D0017C505 /* AuthRemoteDataSourceImpl.swift */,
+				C14426792EBA8E220017C505 /* AuthRepositoryImpl.swift */,
 				C14426642EB985340017C505 /* models */,
 				C144265C2EB97CBD0017C505 /* RoomRemoteSourceImpl.swift */,
 				C14426602EB97DBD0017C505 /* RoomRepositoryImpl.swift */,
@@ -178,6 +202,7 @@
 		C144262D2EAD312F0017C505 /* shared */ = {
 			isa = PBXGroup;
 			children = (
+				C14426872EBA8F130017C505 /* AuthenticationManager.swift */,
 				C14426502EB6F60F0017C505 /* Failure.swift */,
 				C14426692EB99DF50017C505 /* Network.swift */,
 				C144266B2EB99E1A0017C505 /* ApiResponse.swift */,
@@ -217,6 +242,7 @@
 		C144264B2EB6F5700017C505 /* repository */ = {
 			isa = PBXGroup;
 			children = (
+				C14426752EBA8D650017C505 /* AuthRepository.swift */,
 				C144264C2EB6F5890017C505 /* ReservationsRepository.swift */,
 				C14426622EB97DD90017C505 /* RoomRepository.swift */,
 			);
@@ -226,6 +252,7 @@
 		C14426522EB6F69B0017C505 /* datasource */ = {
 			isa = PBXGroup;
 			children = (
+				C14426772EBA8D8B0017C505 /* AuthRemoteDataSource.swift */,
 				C144265E2EB97CD10017C505 /* RoomRemoteSource.swift */,
 			);
 			path = datasource;
@@ -234,6 +261,7 @@
 		C14426592EB6FD490017C505 /* usecases */ = {
 			isa = PBXGroup;
 			children = (
+				C14426732EBA8D400017C505 /* LoginUseCase.swift */,
 				C14426572EB6FC5D0017C505 /* MakeReservationsUseCase.swift */,
 				C14426672EB987930017C505 /* GetRoomsAvailables.swift */,
 			);
@@ -243,9 +271,19 @@
 		C14426642EB985340017C505 /* models */ = {
 			isa = PBXGroup;
 			children = (
+				C144267D2EBA8E440017C505 /* LoginApi.swift */,
 				C14426652EB985430017C505 /* RoomApi.swift */,
 			);
 			path = models;
+			sourceTree = "<group>";
+		};
+		C14426842EBA8ECB0017C505 /* auth */ = {
+			isa = PBXGroup;
+			children = (
+				C14426852EBA8EF10017C505 /* LoginViewModel.swift */,
+				C14426812EBA8EB80017C505 /* LoginView.swift */,
+			);
+			name = auth;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -318,18 +356,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C14426722EBA8D150017C505 /* User.swift in Sources */,
 				C144266A2EB99DF50017C505 /* Network.swift in Sources */,
 				C14426482EB6BF090017C505 /* RoomsAvailableViewModel.swift in Sources */,
 				C14426462EB6BD3D0017C505 /* RoomsAvailablesView.swift in Sources */,
 				C14426302EB27BF80017C505 /* Customer.swift in Sources */,
 				C14426362EB27DDB0017C505 /* Profile.swift in Sources */,
+				C144267C2EBA8E2D0017C505 /* AuthRemoteDataSourceImpl.swift in Sources */,
 				C144266C2EB99E1A0017C505 /* ApiResponse.swift in Sources */,
 				C14426442EB6B3830017C505 /* ProfileView.swift in Sources */,
 				C14426392EB27E6A0017C505 /* ReservationView.swift in Sources */,
+				C14426862EBA8EF10017C505 /* LoginViewModel.swift in Sources */,
 				C14426702EB9A4F00017C505 /* TokenManager.swift in Sources */,
 				C144264A2EB6CE640017C505 /* ProfileViewModel.swift in Sources */,
 				C144263B2EB2849D0017C505 /* ReservationViewModel.swift in Sources */,
 				C14426582EB6FC5D0017C505 /* MakeReservationsUseCase.swift in Sources */,
+				C144267A2EBA8E220017C505 /* AuthRepositoryImpl.swift in Sources */,
 				C14426682EB987930017C505 /* GetRoomsAvailables.swift in Sources */,
 				C14426412EB6B2F00017C505 /* MainHomeView.swift in Sources */,
 				C144266E2EB99FD20017C505 /* DependencyContainer.swift in Sources */,
@@ -337,12 +379,18 @@
 				C14426512EB6F60F0017C505 /* Failure.swift in Sources */,
 				C144265D2EB97CBD0017C505 /* RoomRemoteSourceImpl.swift in Sources */,
 				C14426612EB97DBD0017C505 /* RoomRepositoryImpl.swift in Sources */,
+				C14426882EBA8F130017C505 /* AuthenticationManager.swift in Sources */,
 				C144264D2EB6F5890017C505 /* ReservationsRepository.swift in Sources */,
 				C14426632EB97DD90017C505 /* RoomRepository.swift in Sources */,
 				C14426322EB27C3E0017C505 /* Reservation.swift in Sources */,
 				C144261A2EAD2F000017C505 /* HotelApp.swift in Sources */,
 				C14426342EB27D610017C505 /* RoomHotel.swift in Sources */,
+				C14426762EBA8D650017C505 /* AuthRepository.swift in Sources */,
+				C144267E2EBA8E440017C505 /* LoginApi.swift in Sources */,
+				C14426782EBA8D8B0017C505 /* AuthRemoteDataSource.swift in Sources */,
+				C14426822EBA8EB80017C505 /* LoginView.swift in Sources */,
 				C14426662EB985430017C505 /* RoomApi.swift in Sources */,
+				C14426742EBA8D400017C505 /* LoginUseCase.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

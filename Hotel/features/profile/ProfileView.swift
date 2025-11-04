@@ -7,8 +7,10 @@
 
 import SwiftUI
 struct ProfileView: View {
-    
+
     @StateObject private var vm = ProfileViewModel()
+    @EnvironmentObject var authManager: AuthenticationManager
+
     var body: some View {
         VStack(spacing: 30) {
             if(!vm.showLoader){
@@ -65,8 +67,10 @@ struct ProfileView: View {
             
             // Logout Button
             Button(action: {
-                // Logout action - to be implemented
-                print("Logout tapped")
+                vm.onLogout = {
+                    authManager.logout()
+                }
+                vm.logout()
             }) {
                 Text("Log Out")
                     .font(.headline)
@@ -78,15 +82,23 @@ struct ProfileView: View {
             }
             .padding(.horizontal, 30)
             .padding(.bottom, 40)
-                
+
             }else{
                 ProgressView("Loading Profile")
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
 
             }
         }
-        .navigationTitle("Profile")        
+        .navigationTitle("Profile")
         .background(Color(.systemGroupedBackground))
+        .alert("Logout", isPresented: $vm.showLogoutAlert) {
+            Button("Cancel", role: .cancel) { }
+            Button("Logout", role: .destructive) {
+                vm.confirmLogout()
+            }
+        } message: {
+            Text("Are you sure you want to logout?")
+        }
 
     }
 }
