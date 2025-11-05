@@ -37,4 +37,21 @@ class ReservationRepositoryImpl: ReservationsRepository {
         }
     }
 
+    func makeReservation(guestId: Int64, roomId: Int64, startTime: String, endTime: String, total: Double) async -> Result<Void, Failure> {
+        do {
+            try await remoteDataSource.makeReservation(
+                guestId: guestId,
+                roomId: roomId,
+                startTime: startTime,
+                endTime: endTime,
+                total: total
+            )
+            return .success(())
+        } catch let error as Failure {
+            return .failure(error)
+        } catch {
+            return .failure(.unknown(error.localizedDescription))
+        }
+    }
+
 }

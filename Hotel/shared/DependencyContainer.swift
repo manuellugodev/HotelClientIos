@@ -78,4 +78,17 @@ class DependencyContainer {
         return MyReservationsViewModel(getReservationsUseCase: makeGetReservationsUseCase())
     }
 
+    func makeMakeReservationUseCase() -> MakeReservationUseCase {
+        return MakeReservationInteractor(repository: makeReservationsRepository())
+    }
+
+    func makeConfirmationReservationViewModel(room: RoomHotel, checkIn: Date, checkOut: Date) -> ConfirmationReservationViewModel {
+        return ConfirmationReservationViewModel(
+            makeReservationUseCase: makeMakeReservationUseCase(),
+            room: room,
+            checkIn: checkIn,
+            checkOut: checkOut
+        )
+    }
+
 }

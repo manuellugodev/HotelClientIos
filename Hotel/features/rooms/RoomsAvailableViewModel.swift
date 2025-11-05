@@ -9,10 +9,12 @@ import Foundation
 class RoomsAvailableViewModel: ObservableObject {
     @Published var rooms: [RoomHotel] = []
     @Published var isLoading: Bool = false
+    @Published var showConfirmation: Bool = false
+    @Published var selectedRoom: RoomHotel?
 
     let getRoomsAvailables:GetRoomsAvailables
-    private let checkInDate: Date
-    private let checkOutDate: Date
+    let checkInDate: Date
+    let checkOutDate: Date
     private let guests: Int
 
     init(source:GetRoomsAvailables, checkIn: Date, checkOut: Date, guests: Int) {
@@ -49,8 +51,8 @@ class RoomsAvailableViewModel: ObservableObject {
     }
     
     func selectRoom(_ room: RoomHotel) {
-        print("Selected room: \(room.roomType)")
-        // Handle room selection
+        selectedRoom = room
+        showConfirmation = true
     }
     
     func getFakeData(){

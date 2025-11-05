@@ -16,6 +16,7 @@ struct RoomsAvailableView: View {
     let guests: Int
 
     @StateObject private var viewModel: RoomsAvailableViewModel
+    @Environment(\.dismiss) private var dismiss
 
     init(checkIn: Date, checkOut: Date, guests: Int) {
         self.checkIn = checkIn
@@ -40,6 +41,15 @@ struct RoomsAvailableView: View {
                 }
             }
             .navigationTitle("Available Rooms")
+            .navigationDestination(isPresented: $viewModel.showConfirmation) {
+                if let room = viewModel.selectedRoom {
+                    ConfirmationReservationView(
+                        room: room,
+                        checkIn: viewModel.checkInDate,
+                        checkOut: viewModel.checkOutDate
+                    )
+                }
+            }
     }
 }
 // MARK: - Room List View (Isolated)

@@ -70,4 +70,23 @@ class ReservationRemoteDataSourceImpl: ReservationRemoteDataSource {
             throw error
         }
     }
+
+    func makeReservation(guestId: Int64, roomId: Int64, startTime: String, endTime: String, total: Double) async throws {
+        let networkManager = BaseNetworkManager(baseURL: baseURL, session: session)
+
+        // API returns plain text "Appointment made successfully", so we decode as String and ignore it
+        let _: String = try await networkManager.fetch(
+            endpoint: "/appointment",
+            queryItems: [
+                URLQueryItem(name: "guestId", value: String(guestId)),
+                URLQueryItem(name: "roomId", value: String(roomId)),
+                URLQueryItem(name: "startTime", value: startTime),
+                URLQueryItem(name: "endTime", value: endTime),
+                URLQueryItem(name: "purpose", value: "Travel"),
+                URLQueryItem(name: "total", value: String(total))
+            ],
+            method: "POST"
+        )
+        // Success if no error was thrown
+    }
 }
