@@ -12,26 +12,29 @@ class ReservationRepositoryImpl: ReservationsRepository {
     init(remoteDataSource: ReservationRemoteDataSource) {
         self.remoteDataSource = remoteDataSource
     }
-    
-    func makeReservation(_ reservation: Reservation) async -> Result<Reservation, Failure> {
-        // Convert domain entity to data model
-        let reservationModel = ReservationModel.fromDomain(reservation)
-        
+
+    func getUpcomingReservations(guestId: Int64) async -> Result<[Reservation], Failure> {
         do {
-            // Call remote data source
-            let resultModel = try await remoteDataSource.makeReservation(reservationModel)
-            
-            // Convert back to domain entity
-            let resultReservation = resultModel.toDomain()
-            
-            return .success(resultReservation)
-            
+            let reservationsApi = try await remoteDataSource.getUpcomingReservations(guestId: guestId)
+            let reservations = reservationsApi.map { $0.toDomain() }
+            return .success(reservations)
         } catch let error as Failure {
             return .failure(error)
-            
         } catch {
             return .failure(.unknown(error.localizedDescription))
         }
     }
-    
+
+    func getPastReservations(guestId: Int64) async -> Result<[Reservation], Failure> {
+        do {
+            let reservationsApi = try await remoteDataSource.getPastReservations(guestId: guestId)
+            let reservations = reservationsApi.map { $0.toDomain() }
+            return .success(reservations)
+        } catch let error as Failure {
+            return .failure(error)
+        } catch {
+            return .failure(.unknown(error.localizedDescription))
+        }
+    }
+
 }

@@ -16,7 +16,8 @@ class TokenManager {
     private let tokenKey = "authToken"
     private let usernameKey = "authUsername"
     private let refreshTokenKey = "refreshToken"
-    
+    private let userIdKey = "authuserid"
+
     private init() {
         // Token will be saved after successful login
     }
@@ -58,6 +59,17 @@ class TokenManager {
     func deleteUsername(){
         delete(forKey: usernameKey)
     }
+    func saveGuestId(id:Int64){
+        save(String(id), forKey: userIdKey)
+    }
+
+    func getGuestId() -> Int64? {
+        guard let guestIdString = retrieve(forKey: userIdKey) else {
+            return nil
+        }
+        return Int64(guestIdString)
+    }
+
     func clearAll() {
         deleteToken()
         deleteRefreshToken()

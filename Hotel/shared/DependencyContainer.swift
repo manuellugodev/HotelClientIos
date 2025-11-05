@@ -13,13 +13,15 @@ class DependencyContainer {
     private let networkManager: BaseNetworkManager
     private let roomRemoteSource: RoomRemoteSource
     private let authRemoteDataSource: AuthRemoteDataSource
-    private let profileRemoteSource:ProfileRemoteSource
+    private let profileRemoteSource: ProfileRemoteSource
+    private let reservationRemoteDataSource: ReservationRemoteDataSource
 
     private init() {
         self.networkManager = BaseNetworkManager(baseURL: "https://hotel.manuellugo.dev")
         self.roomRemoteSource = RoomRemoteSourceImpl(networkManager: networkManager)
         self.authRemoteDataSource = AuthRemoteDataSourceImpl(networkManager: networkManager)
         self.profileRemoteSource = ProfileRemoteSourceImpl(networkManager: networkManager)
+        self.reservationRemoteDataSource = ReservationRemoteDataSourceImpl(session: .shared)
     }
 
     // MARK: - Rooms
@@ -62,5 +64,18 @@ class DependencyContainer {
     func makeProfileRepository() -> ProfileRepository{
         return ProfileRepositoryImpl(remoteSource:profileRemoteSource)
     }
-    
+
+    // MARK: - Reservations
+    func makeReservationsRepository() -> ReservationsRepository {
+        return ReservationRepositoryImpl(remoteDataSource: reservationRemoteDataSource)
+    }
+
+    func makeGetReservationsUseCase() -> GetReservationsUseCase {
+        return GetReservationsInteractor(repository: makeReservationsRepository())
+    }
+
+    func makeMyReservationsViewModel() -> MyReservationsViewModel {
+        return MyReservationsViewModel(getReservationsUseCase: makeGetReservationsUseCase())
+    }
+
 }

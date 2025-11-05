@@ -45,27 +45,14 @@ struct HomeTabView: View {
 // MARK: - Reservations Tab with Navigation
 struct ReservationsTabView: View {
     var body: some View {
-       
-        ReservationsView()
-        
+
+        MyReservationsView()
+
     }
 }
 struct ProfileTabView: View {
     var body: some View {
-    
-        ProfileView()
-    }
-}
 
-struct ReservationsView: View {
-    var body: some View {
-        VStack {
-            Text("My Reservations View")
-                .font(.title)
-                .foregroundColor(.gray)
-        }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color(.systemGroupedBackground))
-        .navigationTitle("My Reservations")
+        ProfileView()
     }
 }

@@ -7,8 +7,7 @@
 
 import Foundation
 
-import Foundation
-
 protocol ReservationsRepository {
-    func makeReservation(_ reservation: Reservation) async -> Result<Reservation, Failure>
+    func getUpcomingReservations(guestId: Int64) async -> Result<[Reservation], Failure>
+    func getPastReservations(guestId: Int64) async -> Result<[Reservation], Failure>
 }

@@ -15,4 +15,16 @@ struct RoomApi: Codable {
     let description: String
     let price: Double
     let image: String
+
+    // Convert API model to domain model
+    func toDomain() -> RoomHotel {
+        return RoomHotel(
+            id: Int64(id),
+            description: description,
+            roomType: roomType,
+            pathImage: image,
+            peopleQuantity: capacity,
+            price: price
+        )
+    }
 }

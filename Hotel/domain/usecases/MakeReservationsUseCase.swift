@@ -19,7 +19,7 @@ class MakeReservationInteractor: MakeReservationUseCase {
     }
     
     func execute(_ reservation: Reservation) async -> Result<Reservation, Failure> {
-    
-        return await repository.makeReservation(reservation)
+        // TODO: Implement makeReservation when needed
+        return .failure(.unknown("makeReservation not implemented yet"))
     }
 }

@@ -8,5 +8,6 @@
 import Foundation
 
 protocol ReservationRemoteDataSource {
-    func makeReservation(_ reservationModel: Reservation) async throws -> Reservation
+    func getUpcomingReservations(guestId: Int64) async throws -> [ReservationApi]
+    func getPastReservations(guestId: Int64) async throws -> [ReservationApi]
 }
