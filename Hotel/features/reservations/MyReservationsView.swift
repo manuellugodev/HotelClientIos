@@ -38,7 +38,11 @@ struct MyReservationsView: View {
                 } else if viewModel.reservations.isEmpty {
                     EmptyReservationsView(type: viewModel.selectedTab)
                 } else {
-                    ReservationListView(reservations: viewModel.reservations)
+                    ReservationListView(
+                        reservations: viewModel.reservations,
+                        deletingReservationId: viewModel.deletingReservationId,
+                        onDelete: viewModel.deleteReservation
+                    )
                 }
             }
         }
@@ -52,22 +56,35 @@ struct MyReservationsView: View {
 // MARK: - Reservation List View
 struct ReservationListView: View {
     let reservations: [Reservation]
+    let deletingReservationId: Int?
+    let onDelete: (Int) -> Void
 
     var body: some View {
-        ScrollView {
-            LazyVStack(spacing: 16) {
-                ForEach(reservations, id: \.id) { reservation in
-                    ReservationCardView(reservation: reservation)
+        List {
+            ForEach(reservations, id: \.id) { reservation in
+                ReservationCardView(
+                    reservation: reservation,
+                    isDeleting: deletingReservationId == reservation.id
+                )
+                .listRowInsets(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
+                .listRowSeparator(.hidden)
+                .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                    Button(role: .destructive) {
+                        onDelete(reservation.id)
+                    } label: {
+                        Label("Delete", systemImage: "trash")
+                    }
                 }
             }
-            .padding()
         }
+        .listStyle(.plain)
     }
 }
 
 // MARK: - Reservation Card View
 struct ReservationCardView: View {
     let reservation: Reservation
+    let isDeleting: Bool
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
@@ -143,6 +160,15 @@ struct ReservationCardView: View {
         .background(Color(.systemBackground))
         .cornerRadius(12)
         .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 2)
+        .opacity(isDeleting ? 0.5 : 1.0)
+        .overlay(
+            Group {
+                if isDeleting {
+                    ProgressView()
+                        .scaleEffect(1.5)
+                }
+            }
+        )
     }
 
     private func formatDateRange(checkIn: Int64, checkOut: Int64) -> String {

@@ -11,4 +11,5 @@ protocol ReservationsRepository {
     func getUpcomingReservations(guestId: Int64) async -> Result<[Reservation], Failure>
     func getPastReservations(guestId: Int64) async -> Result<[Reservation], Failure>
     func makeReservation(guestId: Int64, roomId: Int64, startTime: String, endTime: String, total: Double) async -> Result<Void, Failure>
+    func deleteReservation(appointmentId: Int64) async -> Result<Void, Failure>
 }

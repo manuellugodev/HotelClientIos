@@ -12,11 +12,14 @@ class MyReservationsViewModel: ObservableObject {
     @Published var selectedTab: ReservationType = .upcoming
     @Published var isLoading = false
     @Published var errorMessage: String?
+    @Published var deletingReservationId: Int?
 
     private let getReservationsUseCase: GetReservationsUseCase
+    private let deleteReservationUseCase: DeleteReservationUseCase
 
-    init(getReservationsUseCase: GetReservationsUseCase) {
+    init(getReservationsUseCase: GetReservationsUseCase, deleteReservationUseCase: DeleteReservationUseCase) {
         self.getReservationsUseCase = getReservationsUseCase
+        self.deleteReservationUseCase = deleteReservationUseCase
     }
 
     func loadReservations() {
@@ -40,5 +43,24 @@ class MyReservationsViewModel: ObservableObject {
     func switchTab(to tab: ReservationType) {
         selectedTab = tab
         loadReservations()
+    }
+
+    func deleteReservation(appointmentId: Int) {
+        deletingReservationId = appointmentId
+        errorMessage = nil
+
+        Task {
+            let result = await deleteReservationUseCase.execute(appointmentId: Int64(appointmentId))
+
+            switch result {
+            case .success:
+                // Remove from local list
+                self.reservations.removeAll { $0.id == appointmentId }
+            case .failure(let error):
+                self.errorMessage = error.localizedDescription
+            }
+
+            self.deletingReservationId = nil
+        }
     }
 }

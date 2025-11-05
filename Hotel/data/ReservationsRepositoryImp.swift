@@ -54,4 +54,15 @@ class ReservationRepositoryImpl: ReservationsRepository {
         }
     }
 
+    func deleteReservation(appointmentId: Int64) async -> Result<Void, Failure> {
+        do {
+            try await remoteDataSource.deleteReservation(appointmentId: appointmentId)
+            return .success(())
+        } catch let error as Failure {
+            return .failure(error)
+        } catch {
+            return .failure(.unknown(error.localizedDescription))
+        }
+    }
+
 }

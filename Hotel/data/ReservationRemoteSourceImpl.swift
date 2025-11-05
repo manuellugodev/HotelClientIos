@@ -89,4 +89,18 @@ class ReservationRemoteDataSourceImpl: ReservationRemoteDataSource {
         )
         // Success if no error was thrown
     }
+
+    func deleteReservation(appointmentId: Int64) async throws {
+        let networkManager = BaseNetworkManager(baseURL: baseURL, session: session)
+
+        // API returns success message, so we decode as String and ignore it
+        let _: String = try await networkManager.fetch(
+            endpoint: "/appointment",
+            queryItems: [
+                URLQueryItem(name: "id", value: String(appointmentId))
+            ],
+            method: "DELETE"
+        )
+        // Success if no error was thrown
+    }
 }

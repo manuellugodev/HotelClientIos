@@ -74,8 +74,15 @@ class DependencyContainer {
         return GetReservationsInteractor(repository: makeReservationsRepository())
     }
 
+    func makeDeleteReservationUseCase() -> DeleteReservationUseCase {
+        return DeleteReservationInteractor(repository: makeReservationsRepository())
+    }
+
     func makeMyReservationsViewModel() -> MyReservationsViewModel {
-        return MyReservationsViewModel(getReservationsUseCase: makeGetReservationsUseCase())
+        return MyReservationsViewModel(
+            getReservationsUseCase: makeGetReservationsUseCase(),
+            deleteReservationUseCase: makeDeleteReservationUseCase()
+        )
     }
 
     func makeMakeReservationUseCase() -> MakeReservationUseCase {

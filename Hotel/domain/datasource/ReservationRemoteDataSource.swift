@@ -11,4 +11,5 @@ protocol ReservationRemoteDataSource {
     func getUpcomingReservations(guestId: Int64) async throws -> [ReservationApi]
     func getPastReservations(guestId: Int64) async throws -> [ReservationApi]
     func makeReservation(guestId: Int64, roomId: Int64, startTime: String, endTime: String, total: Double) async throws
+    func deleteReservation(appointmentId: Int64) async throws
 }
