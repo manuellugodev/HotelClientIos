@@ -36,6 +36,8 @@ struct RoomsAvailableView: View {
                 } else {
                     RoomListView(
                         rooms: viewModel.rooms,
+                        checkIn: checkIn,
+                        checkOut: checkOut,
                         onRoomSelected: viewModel.selectRoom
                     )
                 }
@@ -55,13 +57,15 @@ struct RoomsAvailableView: View {
 // MARK: - Room List View (Isolated)
 struct RoomListView: View {
     let rooms: [RoomHotel]
+    let checkIn: Date
+    let checkOut: Date
     let onRoomSelected: (RoomHotel) -> Void
-    
+
     var body: some View {
         ScrollView {
             LazyVStack(spacing: 16) {
                 ForEach(rooms, id: \.id) { room in
-                    RoomCardView(room: room)
+                    RoomCardView(room: room, checkIn: checkIn, checkOut: checkOut)
                         .onTapGesture {
                             onRoomSelected(room)
                         }
@@ -75,7 +79,19 @@ struct RoomListView: View {
 // MARK: - Room Card View (Isolated)
 struct RoomCardView: View {
     let room: RoomHotel
-    
+    let checkIn: Date
+    let checkOut: Date
+
+    private var numberOfNights: Int {
+        let calendar = Calendar.current
+        let components = calendar.dateComponents([.day], from: checkIn, to: checkOut)
+        return max(components.day ?? 1, 1)
+    }
+
+    private var totalPrice: Double {
+        return room.price * Double(numberOfNights)
+    }
+
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             // Image Section - Remote Image Loading
@@ -134,10 +150,10 @@ struct RoomCardView: View {
                     Label("\(room.peopleQuantity) persons", systemImage: "person.2.fill")
                         .font(.subheadline)
                         .foregroundColor(.secondary)
-                    
+
                     Spacer()
-                    
-                    Text("$\(String(format: "%.0f", room.price))")
+
+                    Text("$\(String(format: "%.2f", totalPrice))")
                         .font(.title3)
                         .fontWeight(.bold)
                         .foregroundColor(.blue)
