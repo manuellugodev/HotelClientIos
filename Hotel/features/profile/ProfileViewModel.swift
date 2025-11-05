@@ -8,34 +8,52 @@
 import Foundation
 
 class ProfileViewModel:ObservableObject{
-      @Published var name: String = ""
-      @Published var email: String = ""
-      @Published var phone: String = ""
-      @Published var showLogoutAlert: Bool = false
-      @Published var showLoader = true
-
+    @Published var name: String = ""
+    @Published var email: String = ""
+    @Published var phone: String = ""
+    @Published var showLogoutAlert: Bool = false
+    @Published var showLoader = true
+    @Published var showError = false
+    private let getProfile:GetProfileUsecase
+    
     var onLogout: (() -> Void)?
-
-    init() {
-        loadProfile()
+    
+    init(usecase:GetProfileUsecase) {
+        getProfile=usecase
     }
-
+    
     func loadProfile(){
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            self.name = "Manuel Lugo"
-            self.email = "manuellugo2000ml@gmail.com"
-            self.phone = "1 234 567 8900"
-            self.showLoader = false
+        
+        Task{
+            let result = await getProfile.execute()
+            
+            switch result {
+            case .success(let success):
+                self.name = "\(success.firstName) \(success.lastName)"
+                self.phone = success.phone
+                self.email = success.email
+            case .failure(let failure):
+                showError=true
+            }
+            showLoader=false
         }
     }
+    
+  
+    
+    func refreshDataProfile(){
+        showLoader = true
+        loadProfile()
+    }
+    
+    func logout() {
+        showLogoutAlert = true
+    }
 
+    func confirmLogout() {
+        print("User logged out")
+        onLogout?()
+    }
 
-      func logout() {
-          showLogoutAlert = true
-      }
+}
 
-      func confirmLogout() {
-          print("User logged out")
-          onLogout?()
-      }
-  }

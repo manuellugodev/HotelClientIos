@@ -8,8 +8,9 @@
 import SwiftUI
 struct ProfileView: View {
 
-    @StateObject private var vm = ProfileViewModel()
+    @StateObject private var vm :ProfileViewModel = DependencyContainer.shared.makeProfileViewModel()
     @EnvironmentObject var authManager: AuthenticationManager
+    
 
     var body: some View {
         VStack(spacing: 30) {
@@ -100,6 +101,9 @@ struct ProfileView: View {
             Text("Are you sure you want to logout?")
         }
 
+        .task {
+            vm.refreshDataProfile()
+        }
     }
 }
 

@@ -1,16 +1,18 @@
 //
-//  Profile.swift
+//  ProfileApi.swift
 //  Hotel
 //
-//  Created by Manuel Lugo on 10/29/25.
+//  Created by Manuel Lugo on 11/4/25.
 //
 
 import Foundation
-struct Profile:Codable{
-    let username:String
+//
+
+import Foundation
+struct ProfileApi:Codable{
     let firstName:String
     let lastName:String
     let email:String
     let phone: String
-    let guestId:Int
+    let guestId:Int64
 }

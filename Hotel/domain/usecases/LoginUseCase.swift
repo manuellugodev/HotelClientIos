@@ -36,6 +36,7 @@ class LoginInteractor: LoginUseCase {
         // If successful, save token
         if case .success(let user) = result {
             tokenManager.saveToken(user.token)
+            tokenManager.saveUsername(username)
         }
 
         return result

@@ -13,11 +13,13 @@ class DependencyContainer {
     private let networkManager: BaseNetworkManager
     private let roomRemoteSource: RoomRemoteSource
     private let authRemoteDataSource: AuthRemoteDataSource
+    private let profileRemoteSource:ProfileRemoteSource
 
     private init() {
         self.networkManager = BaseNetworkManager(baseURL: "https://hotel.manuellugo.dev")
         self.roomRemoteSource = RoomRemoteSourceImpl(networkManager: networkManager)
         self.authRemoteDataSource = AuthRemoteDataSourceImpl(networkManager: networkManager)
+        self.profileRemoteSource = ProfileRemoteSourceImpl(networkManager: networkManager)
     }
 
     // MARK: - Rooms
@@ -50,4 +52,15 @@ class DependencyContainer {
     func makeLoginViewModel() -> LoginViewModel {
         return LoginViewModel(loginUseCase: makeLoginUseCase())
     }
+    func makeProfileViewModel() -> ProfileViewModel{
+        return ProfileViewModel(usecase:makeGetProfileUseCase())
+    }
+    
+    func makeGetProfileUseCase() -> GetProfileUsecase{
+        return GetProfileInteractor(repository: makeProfileRepository())
+    }
+    func makeProfileRepository() -> ProfileRepository{
+        return ProfileRepositoryImpl(remoteSource:profileRemoteSource)
+    }
+    
 }

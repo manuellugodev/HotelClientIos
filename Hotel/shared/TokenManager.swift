@@ -14,6 +14,7 @@ class TokenManager {
     
     private let service = "com.hotel.app"
     private let tokenKey = "authToken"
+    private let usernameKey = "authUsername"
     private let refreshTokenKey = "refreshToken"
     
     private init() {
@@ -29,6 +30,13 @@ class TokenManager {
         save(token, forKey: refreshTokenKey)
     }
     
+    func saveUsername(_ username:String){
+        save(username,forKey:usernameKey)
+    }
+    
+    func getUsername()-> String?{
+        return retrieve(forKey: usernameKey)
+    }
     // MARK: - Get Token
     func getToken() -> String? {
         return retrieve(forKey: tokenKey)
@@ -47,6 +55,9 @@ class TokenManager {
         delete(forKey: refreshTokenKey)
     }
     
+    func deleteUsername(){
+        delete(forKey: usernameKey)
+    }
     func clearAll() {
         deleteToken()
         deleteRefreshToken()
