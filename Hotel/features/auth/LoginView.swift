@@ -11,6 +11,7 @@ struct LoginView: View {
     @StateObject private var viewModel = DependencyContainer.shared.makeLoginViewModel()
     @EnvironmentObject var authManager: AuthenticationManager
     @State private var showRegisterView = false
+    @State private var isPasswordVisible = false
 
     var body: some View {
         ZStack {
@@ -63,9 +64,36 @@ struct LoginView: View {
                             .font(.subheadline)
                             .foregroundColor(.white)
 
-                        SecureField("Enter password", text: $viewModel.password)
-                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                        HStack(spacing: 0) {
+                            Group {
+                                if isPasswordVisible {
+                                    TextField("Enter password", text: $viewModel.password)
+                                        .autocapitalization(.none)
+                                        .disabled(viewModel.isLoading)
+                                } else {
+                                    SecureField("Enter password", text: $viewModel.password)
+                                        .disabled(viewModel.isLoading)
+                                }
+                            }
+                            .padding(.leading, 7)
+                            .padding(.vertical, 7)
+
+                            Button(action: {
+                                isPasswordVisible.toggle()
+                            }) {
+                                Image(systemName: isPasswordVisible ? "eye.slash.fill" : "eye.fill")
+                                    .foregroundColor(.gray)
+                                    .font(.system(size: 14))
+                                    .frame(width: 35, height: 35)
+                            }
                             .disabled(viewModel.isLoading)
+                        }
+                        .background(Color.white)
+                        .cornerRadius(5)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 5)
+                                .stroke(Color.gray.opacity(0.5), lineWidth: 0.5)
+                        )
                     }
 
                     // Error Message

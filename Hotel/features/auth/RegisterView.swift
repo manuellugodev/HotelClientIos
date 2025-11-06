@@ -217,15 +217,44 @@ struct SecureFormFieldView: View {
     let error: String?
     var isDisabled: Bool = false
 
+    @State private var isPasswordVisible: Bool = false
+
     var body: some View {
         VStack(alignment: .leading, spacing: 6) {
             Text(label)
                 .font(.subheadline)
                 .foregroundColor(.white)
 
-            SecureField(placeholder, text: $text)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
+            HStack(spacing: 0) {
+                Group {
+                    if isPasswordVisible {
+                        TextField(placeholder, text: $text)
+                            .autocapitalization(.none)
+                            .disabled(isDisabled)
+                    } else {
+                        SecureField(placeholder, text: $text)
+                            .disabled(isDisabled)
+                    }
+                }
+                .padding(.leading, 7)
+                .padding(.vertical, 7)
+
+                Button(action: {
+                    isPasswordVisible.toggle()
+                }) {
+                    Image(systemName: isPasswordVisible ? "eye.slash.fill" : "eye.fill")
+                        .foregroundColor(.gray)
+                        .font(.system(size: 14))
+                        .frame(width: 35, height: 35)
+                }
                 .disabled(isDisabled)
+            }
+            .background(Color.white)
+            .cornerRadius(5)
+            .overlay(
+                RoundedRectangle(cornerRadius: 5)
+                    .stroke(Color.gray.opacity(0.5), lineWidth: 0.5)
+            )
 
             if let error = error {
                 HStack(spacing: 4) {

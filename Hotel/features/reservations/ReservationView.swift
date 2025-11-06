@@ -26,7 +26,7 @@ struct ReservationView: View {
             }
             .padding(.top,30)
             .padding(.horizontal,20)
-            .navigationTitle("Scheduled Reservation")
+            .navigationTitle("Search Reservation")
             .navigationDestination(isPresented: $navigateToReservations){
                 RoomsAvailableView(
                     checkIn: vm.checkIn,
