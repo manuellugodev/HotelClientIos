@@ -1,6 +1,6 @@
 # Hotel iOS/macOS Project - Context Documentation
 
-**Last Updated**: 2025-11-05
+**Last Updated**: 2025-11-06
 **Project Type**: Native iOS/macOS Hotel Booking Application
 **API Backend**: https://hotel.manuellugo.dev
 **Total LOC**: ~2,150 lines of Swift
@@ -9,7 +9,7 @@
 
 ## Quick Start Context
 
-This is a **SwiftUI-based hotel booking app** using **Clean Architecture** principles. The app is functional with authentication, room search, and profile management fully implemented. Reservation creation is partially complete and needs finishing.
+This is a **SwiftUI-based hotel booking app** using **Clean Architecture** principles. The app is functional with authentication (login & registration), room search, profile management, reservation creation with confirmation, viewing upcoming/past reservations, and reservation deletion fully implemented.
 
 ---
 
@@ -62,17 +62,21 @@ This is a **SwiftUI-based hotel booking app** using **Clean Architecture** princ
 Hotel/
 ├── HotelApp.swift                      # App entry point
 ├── features/                           # Presentation Layer
-│   ├── auth/                           # ✅ Login/Authentication
+│   ├── auth/                           # ✅ Login/Authentication/Registration
 │   │   ├── LoginView.swift
-│   │   └── LoginViewModel.swift
+│   │   ├── LoginViewModel.swift
+│   │   ├── RegisterView.swift
+│   │   └── RegisterViewModel.swift
 │   ├── home/                           # ✅ Main navigation
 │   │   └── MainHomeView.swift
 │   ├── rooms/                          # ✅ Room browsing
 │   │   ├── RoomsAvailablesView.swift
 │   │   └── RoomsAvailableViewModel.swift
-│   ├── reservations/                   # ✅ Reservation search UI
+│   ├── reservations/                   # ✅ Reservation search, booking, and management
 │   │   ├── ReservationView.swift
-│   │   └── ReservationViewModel.swift
+│   │   ├── ReservationViewModel.swift
+│   │   ├── ConfirmationReservationView.swift
+│   │   └── MyReservationsView.swift (upcoming/past)
 │   └── profile/                        # ✅ User profile
 │       ├── ProfileView.swift
 │       └── ProfileViewModel.swift
@@ -85,14 +89,17 @@ Hotel/
 │   │   └── Customer.swift
 │   ├── usecases/                       # Business operations
 │   │   ├── LoginUseCase.swift
+│   │   ├── RegisterUserUseCase.swift
 │   │   ├── GetRoomsAvailables.swift
 │   │   ├── GetProfileUsecase.swift
-│   │   └── MakeReservationsUseCase.swift  # ⚠️ Not integrated in UI
+│   │   ├── MakeReservationsUseCase.swift
+│   │   ├── GetReservationsUseCase.swift
+│   │   └── DeleteReservationUseCase.swift
 │   ├── repository/                     # Repository protocols
 │   └── datasource/                     # Data source protocols
 ├── data/                               # Data Layer
 │   ├── models/                         # API DTOs
-│   │   ├── LoginApi.swift
+│   │   ├── LoginApi.swift              # LoginRequest/Response, RegisterRequest/Response
 │   │   ├── UserApi.swift
 │   │   ├── ProfileApi.swift
 │   │   └── RoomApi.swift
@@ -122,44 +129,58 @@ Hotel/
    - Session persistence
    - Logout with confirmation
 
-2. **Room Search & Browsing** (`features/rooms/`)
+2. **User Registration** (`features/auth/`)
+   - User registration with complete form validation
+   - Field-specific error messages (username, firstName, lastName, email, phone, password)
+   - Email format validation
+   - Phone number validation
+   - Password strength validation (minimum 6 characters)
+   - Password confirmation matching
+   - Success notification with automatic navigation to login
+   - POST `/user/register` endpoint integration
+
+3. **Room Search & Browsing** (`features/rooms/`)
    - Date range selection (check-in/check-out)
    - Guest count selection (adults + children)
    - Available rooms API integration
    - Room list with AsyncImage loading
    - Room details display (type, price, capacity, description)
 
-3. **User Profile** (`features/profile/`)
+4. **User Profile** (`features/profile/`)
    - Profile data fetching via username
    - Display: name, email, phone, guestId
    - Logout functionality
 
-4. **Network Infrastructure** (`shared/Network.swift`)
+5. **Reservation Creation & Confirmation**
+   - Booking confirmation screen after room selection
+   - Guest details and payment summary display
+   - Integration with `MakeReservationsUseCase`
+   - POST `/appointment` endpoint integration
+   - Confirmation UI with reservation details
+
+6. **My Reservations** (`features/reservations/`)
+   - View upcoming reservations (future check-in dates)
+   - View past reservations (historical bookings)
+   - Reservation list display with details
+   - Filter/categorize by date (upcoming vs past)
+
+7. **Reservation Management**
+   - Delete reservation functionality
+   - Confirmation dialog before deletion
+   - Real-time list updates after deletion
+
+8. **Network Infrastructure** (`shared/Network.swift`)
    - Generic fetch with Codable
    - Automatic JWT injection
    - Token refresh on 401
    - Error mapping
    - Request/response logging
 
-### ⚠️ Partially Implemented
-
-1. **Reservation Creation**
-   - Backend integration exists (`MakeReservationsUseCase`)
-   - POST `/appointment` endpoint implemented
-   - **MISSING**: UI flow after room selection
-   - **TODO**: Connect `RoomsAvailableViewModel.selectRoom()` to booking confirmation
-
-2. **My Reservations Tab**
-   - Placeholder UI exists
-   - **MISSING**: API integration to fetch user reservations
-   - **TODO**: Implement `GET /reservations/{guestId}` integration
-
 ### ❌ Not Implemented
 
 - Room details screen (tapping room doesn't navigate)
 - Edit profile functionality
 - Payment integration
-- Reservation cancellation
 - Advanced filters (price range, amenities)
 - Offline caching
 - Comprehensive error handling UI
@@ -228,9 +249,12 @@ Reservation {
 | Endpoint | Method | Auth | Status | Purpose |
 |----------|--------|------|--------|---------|
 | `/login` | POST | No | ✅ | Authenticate user |
+| `/user/register` | POST | No | ✅ | Register new user |
 | `/rooms?dStartTime=&dEndTime=&guests=` | GET | Yes | ✅ | Get available rooms |
 | `/user/{username}` | GET | Yes | ✅ | Get user profile |
-| `/appointment` | POST | Yes | ⚠️ | Create reservation (not in UI) |
+| `/appointment` | POST | Yes | ✅ | Create reservation |
+| `/appointment/{guestId}` | GET | Yes | ✅ | Get user reservations (upcoming/past) |
+| `/appointment/{reservationId}` | DELETE | Yes | ✅ | Delete reservation |
 | `/auth/refresh` | POST | No | ✅ | Refresh access token |
 
 **Base URL**: `https://hotel.manuellugo.dev`
@@ -244,6 +268,9 @@ App Launch
     ↓
 AuthenticationManager.isAuthenticated?
     ├─ NO  → LoginView
+    │           ├─ (tap "Register") → RegisterView
+    │           │                         ↓ (registration success)
+    │           │                      LoginView
     │           ↓ (login success)
     │        MainHomeView
     │
@@ -251,11 +278,17 @@ AuthenticationManager.isAuthenticated?
                 ├─ Tab 1: Home (ReservationView)
                 │           ↓ (search submit)
                 │        RoomsAvailableView
-                │           ↓ (tap room - NOT IMPLEMENTED)
-                │        [BookingConfirmationView?]
+                │           ↓ (tap room)
+                │        BookingConfirmationView
+                │           ↓ (confirm reservation)
+                │        [Reservation created]
                 │
-                ├─ Tab 2: My Reservations (PLACEHOLDER)
+                ├─ Tab 2: My Reservations
                 │        ReservationsView
+                │           ├─ Upcoming Reservations List
+                │           └─ Past Reservations List
+                │               ↓ (delete reservation)
+                │           [Confirmation dialog → Delete]
                 │
                 └─ Tab 3: Profile
                          ProfileView
@@ -324,11 +357,11 @@ APIResponse<T> {
 ## Recent Git History
 
 ```
+35f0f75 - Added feature Delete Reservation
+a4813fc - Fixed bug total Price when search Rooms Availables
+f1d43b6 - Implemented ConfirmationReservation
+4c0b04e - Implemented models of Api and feature upcoming and past Reservations
 5f13dcb - Implemented GetData Profile data flow
-50ec8a2 - Reorganize structure and modified model Reservation
-5a4ccd1 - Fixed feature Room availables
-476f446 - Implemented Auth Feature
-57b3723 - Implemented RoomAvailables Feature (Testing)
 ```
 
 ---
@@ -336,28 +369,20 @@ APIResponse<T> {
 ## Next Steps / TODOs
 
 ### High Priority
-1. **Complete Reservation Creation Flow**
-   - Add booking confirmation screen after room selection
-   - Implement `RoomsAvailableViewModel.selectRoom()` navigation
-   - Create confirmation UI with guest details + payment summary
-   - Connect to existing `MakeReservationsUseCase`
-
-2. **Implement My Reservations Tab**
-   - Create API endpoint integration for fetching user reservations
-   - Build reservation list UI
-   - Add reservation details view
+1. Add room details screen with more info/images
+2. Implement comprehensive error handling UI (network failures, validation errors)
+3. Add loading states and skeleton views
 
 ### Medium Priority
-3. Add room details screen with more info/images
-4. Implement error handling UI (network failures, validation errors)
-5. Add loading states and skeleton views
-6. Implement reservation cancellation
+4. Add profile editing functionality
+5. Implement advanced search filters (price range, amenities)
+6. Improve reservation details view with more information
 
 ### Low Priority
-7. Add profile editing functionality
-8. Implement advanced search filters
-9. Add payment integration
-10. Implement offline caching
+7. Add payment integration
+8. Implement offline caching
+9. Add reservation modification functionality
+10. Implement push notifications for reservation reminders
 
 ---
 
@@ -372,10 +397,14 @@ APIResponse<T> {
 - `Hotel/shared/TokenManager.swift:1` - Keychain token storage
 - `Hotel/shared/AuthenticationManager.swift:1` - Global auth state
 
-### ViewModels
+### ViewModels & Views
 - `Hotel/features/auth/LoginViewModel.swift:1`
+- `Hotel/features/auth/RegisterViewModel.swift:1` - Registration with validation
+- `Hotel/features/auth/RegisterView.swift:1` - Registration form UI
 - `Hotel/features/rooms/RoomsAvailableViewModel.swift:1`
 - `Hotel/features/reservations/ReservationViewModel.swift:1`
+- `Hotel/features/reservations/ConfirmationReservationView.swift:1` - Booking confirmation
+- `Hotel/features/reservations/MyReservationsView.swift:1` - Upcoming/past reservations
 - `Hotel/features/profile/ProfileViewModel.swift:1`
 
 ### Domain Models
