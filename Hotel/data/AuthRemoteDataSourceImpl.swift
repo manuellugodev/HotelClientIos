@@ -26,4 +26,24 @@ class AuthRemoteDataSourceImpl: AuthRemoteDataSource {
             requiresAuth: false  // Login doesn't require auth
         )
     }
+
+    func register(username: String, firstName: String, lastName: String, email: String, phone: String, password: String) async throws -> RegisterResponse {
+        let registerRequest = RegisterRequest(
+            username: username,
+            firstName: firstName,
+            password: password,
+            lastName: lastName,
+            email: email,
+            phone: phone
+        )
+        let encoder = JSONEncoder()
+        let body = try encoder.encode(registerRequest)
+
+        return try await networkManager.fetch(
+            endpoint: "/user/register",
+            method: "POST",
+            body: body,
+            requiresAuth: false  // Register doesn't require auth
+        )
+    }
 }

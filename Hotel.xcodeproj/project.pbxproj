@@ -59,6 +59,12 @@
 		C14426A72EBC01020017C505 /* ReservationRemoteDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14426A62EBC01020017C505 /* ReservationRemoteDataSource.swift */; };
 		C14426A92EBC015E0017C505 /* ReservationRemoteSourceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14426A82EBC015E0017C505 /* ReservationRemoteSourceImpl.swift */; };
 		C14426AB2EBC01660017C505 /* ReservationsRepositoryImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14426AA2EBC01660017C505 /* ReservationsRepositoryImp.swift */; };
+		C14426AD2EBC0C510017C505 /* ConfirmationReservationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14426AC2EBC0C510017C505 /* ConfirmationReservationView.swift */; };
+		C14426AF2EBC0C570017C505 /* ConfirmationReservationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14426AE2EBC0C570017C505 /* ConfirmationReservationViewModel.swift */; };
+		C14426B12EBC180B0017C505 /* DeleteReservationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14426B02EBC180B0017C505 /* DeleteReservationUseCase.swift */; };
+		C14426B32EBD010E0017C505 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14426B22EBD010E0017C505 /* RegisterView.swift */; };
+		C14426B52EBD01150017C505 /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14426B42EBD01150017C505 /* RegisterViewModel.swift */; };
+		C14426B72EBD011F0017C505 /* RegisterUserUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14426B62EBD011F0017C505 /* RegisterUserUseCase.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -115,6 +121,12 @@
 		C14426A62EBC01020017C505 /* ReservationRemoteDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReservationRemoteDataSource.swift; sourceTree = "<group>"; };
 		C14426A82EBC015E0017C505 /* ReservationRemoteSourceImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReservationRemoteSourceImpl.swift; sourceTree = "<group>"; };
 		C14426AA2EBC01660017C505 /* ReservationsRepositoryImp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReservationsRepositoryImp.swift; sourceTree = "<group>"; };
+		C14426AC2EBC0C510017C505 /* ConfirmationReservationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmationReservationView.swift; sourceTree = "<group>"; };
+		C14426AE2EBC0C570017C505 /* ConfirmationReservationViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmationReservationViewModel.swift; sourceTree = "<group>"; };
+		C14426B02EBC180B0017C505 /* DeleteReservationUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeleteReservationUseCase.swift; sourceTree = "<group>"; };
+		C14426B22EBD010E0017C505 /* RegisterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
+		C14426B42EBD01150017C505 /* RegisterViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
+		C14426B62EBD011F0017C505 /* RegisterUserUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterUserUseCase.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -199,6 +211,8 @@
 		C144262A2EAD30FD0017C505 /* reservations */ = {
 			isa = PBXGroup;
 			children = (
+				C14426AE2EBC0C570017C505 /* ConfirmationReservationViewModel.swift */,
+				C14426AC2EBC0C510017C505 /* ConfirmationReservationView.swift */,
 				C14426A42EBBFDC50017C505 /* MyReservationsViewModel.swift */,
 				C14426A22EBBFDBF0017C505 /* MyReservationsView.swift */,
 				C14426382EB27E6A0017C505 /* ReservationView.swift */,
@@ -288,6 +302,8 @@
 		C14426592EB6FD490017C505 /* usecases */ = {
 			isa = PBXGroup;
 			children = (
+				C14426B62EBD011F0017C505 /* RegisterUserUseCase.swift */,
+				C14426B02EBC180B0017C505 /* DeleteReservationUseCase.swift */,
 				C14426A02EBBFDAE0017C505 /* GetReservationsUseCase.swift */,
 				C14426732EBA8D400017C505 /* LoginUseCase.swift */,
 				C14426572EB6FC5D0017C505 /* MakeReservationsUseCase.swift */,
@@ -313,6 +329,8 @@
 		C144268C2EBA94960017C505 /* auth */ = {
 			isa = PBXGroup;
 			children = (
+				C14426B42EBD01150017C505 /* RegisterViewModel.swift */,
+				C14426B22EBD010E0017C505 /* RegisterView.swift */,
 				C144268A2EBA94920017C505 /* LoginView.swift */,
 				C14426852EBA8EF10017C505 /* LoginViewModel.swift */,
 			);
@@ -410,6 +428,7 @@
 				C14426362EB27DDB0017C505 /* Profile.swift in Sources */,
 				C144267C2EBA8E2D0017C505 /* AuthRemoteDataSourceImpl.swift in Sources */,
 				C144266C2EB99E1A0017C505 /* ApiResponse.swift in Sources */,
+				C14426B32EBD010E0017C505 /* RegisterView.swift in Sources */,
 				C144268B2EBA94920017C505 /* LoginView.swift in Sources */,
 				C14426442EB6B3830017C505 /* ProfileView.swift in Sources */,
 				C14426A52EBBFDC50017C505 /* MyReservationsViewModel.swift in Sources */,
@@ -426,11 +445,14 @@
 				C14426A32EBBFDBF0017C505 /* MyReservationsView.swift in Sources */,
 				C144266E2EB99FD20017C505 /* DependencyContainer.swift in Sources */,
 				C14426952EBAB1B80017C505 /* ProfileRepositoryImpl.swift in Sources */,
+				C14426B52EBD01150017C505 /* RegisterViewModel.swift in Sources */,
 				C144265F2EB97CD10017C505 /* RoomRemoteSource.swift in Sources */,
 				C144269F2EBBFD980017C505 /* ReservationApi.swift in Sources */,
 				C14426512EB6F60F0017C505 /* Failure.swift in Sources */,
 				C144265D2EB97CBD0017C505 /* RoomRemoteSourceImpl.swift in Sources */,
 				C14426612EB97DBD0017C505 /* RoomRepositoryImpl.swift in Sources */,
+				C14426B12EBC180B0017C505 /* DeleteReservationUseCase.swift in Sources */,
+				C14426B72EBD011F0017C505 /* RegisterUserUseCase.swift in Sources */,
 				C14426882EBA8F130017C505 /* AuthenticationManager.swift in Sources */,
 				C144264D2EB6F5890017C505 /* ReservationsRepository.swift in Sources */,
 				C14426632EB97DD90017C505 /* RoomRepository.swift in Sources */,
@@ -448,6 +470,8 @@
 				C14426662EB985430017C505 /* RoomApi.swift in Sources */,
 				C14426742EBA8D400017C505 /* LoginUseCase.swift in Sources */,
 				C14426912EBAB0DB0017C505 /* ProfileRepository.swift in Sources */,
+				C14426AD2EBC0C510017C505 /* ConfirmationReservationView.swift in Sources */,
+				C14426AF2EBC0C570017C505 /* ConfirmationReservationViewModel.swift in Sources */,
 				C14426AB2EBC01660017C505 /* ReservationsRepositoryImp.swift in Sources */,
 				C14426A92EBC015E0017C505 /* ReservationRemoteSourceImpl.swift in Sources */,
 				C14426A72EBC01020017C505 /* ReservationRemoteDataSource.swift in Sources */,

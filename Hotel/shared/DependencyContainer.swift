@@ -54,6 +54,14 @@ class DependencyContainer {
     func makeLoginViewModel() -> LoginViewModel {
         return LoginViewModel(loginUseCase: makeLoginUseCase())
     }
+
+    func makeRegisterUserUseCase() -> RegisterUserUseCase {
+        return RegisterUserInteractor(repository: makeAuthRepository())
+    }
+
+    func makeRegisterViewModel() -> RegisterViewModel {
+        return RegisterViewModel(registerUseCase: makeRegisterUserUseCase())
+    }
     func makeProfileViewModel() -> ProfileViewModel{
         return ProfileViewModel(usecase:makeGetProfileUseCase())
     }

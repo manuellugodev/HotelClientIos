@@ -10,6 +10,7 @@ import SwiftUI
 struct LoginView: View {
     @StateObject private var viewModel = DependencyContainer.shared.makeLoginViewModel()
     @EnvironmentObject var authManager: AuthenticationManager
+    @State private var showRegisterView = false
 
     var body: some View {
         ZStack {
@@ -105,12 +106,26 @@ struct LoginView: View {
                     }
                     .disabled(viewModel.isLoading || viewModel.username.isEmpty || viewModel.password.isEmpty)
                     .opacity((viewModel.isLoading || viewModel.username.isEmpty || viewModel.password.isEmpty) ? 0.6 : 1.0)
+
+                    // Register Link
+                    Button(action: {
+                        showRegisterView = true
+                    }) {
+                        Text("Don't have an account? Register")
+                            .font(.subheadline)
+                            .foregroundColor(.white)
+                            .underline()
+                    }
+                    .padding(.top, 8)
                 }
                 .padding(.horizontal, 32)
 
                 Spacer()
                 Spacer()
             }
+        }
+        .sheet(isPresented: $showRegisterView) {
+            RegisterView()
         }
     }
 }

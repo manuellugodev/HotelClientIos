@@ -19,3 +19,20 @@ struct LoginResponse: Codable {
     let errorMessage: String?
     let guestId: Int64
 }
+
+// Register Request model
+struct RegisterRequest: Codable {
+    let username: String
+    let firstName: String
+    let password: String
+    let lastName: String
+    let email: String
+    let phone: String
+}
+
+// Register Response - matches the "data" field from API
+struct RegisterResponse: Codable {
+    let username: String
+    let enabled: Bool
+    let guestId: CustomerApi
+}

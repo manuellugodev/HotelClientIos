@@ -36,6 +36,29 @@ class AuthRepositoryImpl: AuthRepository {
         }
     }
 
+    func register(username: String, firstName: String, lastName: String, email: String, phone: String, password: String) async -> Result<Void, Failure> {
+        do {
+            _ = try await remoteDataSource.register(
+                username: username,
+                firstName: firstName,
+                lastName: lastName,
+                email: email,
+                phone: phone,
+                password: password
+            )
+
+            // Registration successful, return success
+            return .success(())
+
+        } catch let error as APIError {
+            // Map APIError to Failure
+            return .failure(mapAPIErrorToFailure(error))
+
+        } catch {
+            return .failure(.unknown(error.localizedDescription))
+        }
+    }
+
     private func mapAPIErrorToFailure(_ error: APIError) -> Failure {
         switch error {
         case .serverError(let message, let code):
