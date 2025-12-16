@@ -184,8 +184,7 @@ Hotel/
 #### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/manuellugodev/Hotel.git
-cd Hotel
+git clone https://github.com/manuellugodev/HotelClientIos.git
 ```
 
 #### 2. Open in Xcode
