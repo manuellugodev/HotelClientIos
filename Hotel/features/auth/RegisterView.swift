@@ -249,7 +249,7 @@ struct SecureFormFieldView: View {
                 }
                 .disabled(isDisabled)
             }
-            .background(Color.white)
+            .background(Color(uiColor: .systemBackground))
             .cornerRadius(5)
             .overlay(
                 RoundedRectangle(cornerRadius: 5)

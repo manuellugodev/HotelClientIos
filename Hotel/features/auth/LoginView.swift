@@ -88,7 +88,7 @@ struct LoginView: View {
                             }
                             .disabled(viewModel.isLoading)
                         }
-                        .background(Color.white)
+                        .background(Color(uiColor: .systemBackground))
                         .cornerRadius(5)
                         .overlay(
                             RoundedRectangle(cornerRadius: 5)
