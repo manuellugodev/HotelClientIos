@@ -52,6 +52,9 @@ struct RoomsAvailableView: View {
                     )
                 }
             }
+            .onAppear {
+                viewModel.loadRooms()
+            }
     }
 }
 // MARK: - Room List View (Isolated)

@@ -7,20 +7,20 @@
 
 import Foundation
 
+@MainActor
 class LoginViewModel: ObservableObject {
     @Published var username: String = ""
     @Published var password: String = ""
     @Published var isLoading: Bool = false
     @Published var errorMessage: String? = nil
 
-    private let loginUseCase: LoginUseCase
-    var onLoginSuccess: (() -> Void)?
+    nonisolated(unsafe) private let loginUseCase: LoginUseCase
+    nonisolated(unsafe) var onLoginSuccess: (() -> Void)?
 
-    init(loginUseCase: LoginUseCase) {
+    nonisolated init(loginUseCase: LoginUseCase) {
         self.loginUseCase = loginUseCase
     }
 
-    @MainActor
     func login() {
         // Clear previous error
         errorMessage = nil

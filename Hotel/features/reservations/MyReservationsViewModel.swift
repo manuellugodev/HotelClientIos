@@ -7,6 +7,7 @@
 
 import Foundation
 
+@MainActor
 class MyReservationsViewModel: ObservableObject {
     @Published var reservations: [Reservation] = []
     @Published var selectedTab: ReservationType = .upcoming
@@ -14,10 +15,10 @@ class MyReservationsViewModel: ObservableObject {
     @Published var errorMessage: String?
     @Published var deletingReservationId: Int?
 
-    private let getReservationsUseCase: GetReservationsUseCase
-    private let deleteReservationUseCase: DeleteReservationUseCase
+    nonisolated(unsafe) private let getReservationsUseCase: GetReservationsUseCase
+    nonisolated(unsafe) private let deleteReservationUseCase: DeleteReservationUseCase
 
-    init(getReservationsUseCase: GetReservationsUseCase, deleteReservationUseCase: DeleteReservationUseCase) {
+    nonisolated init(getReservationsUseCase: GetReservationsUseCase, deleteReservationUseCase: DeleteReservationUseCase) {
         self.getReservationsUseCase = getReservationsUseCase
         self.deleteReservationUseCase = deleteReservationUseCase
     }

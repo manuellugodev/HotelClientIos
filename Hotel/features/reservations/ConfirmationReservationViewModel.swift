@@ -7,17 +7,18 @@
 
 import Foundation
 
+@MainActor
 class ConfirmationReservationViewModel: ObservableObject {
     @Published var isLoading = false
     @Published var errorMessage: String?
     @Published var showSuccess = false
 
-    private let makeReservationUseCase: MakeReservationUseCase
+    nonisolated(unsafe) private let makeReservationUseCase: MakeReservationUseCase
     let room: RoomHotel
     let checkIn: Date
     let checkOut: Date
 
-    init(makeReservationUseCase: MakeReservationUseCase, room: RoomHotel, checkIn: Date, checkOut: Date) {
+    nonisolated init(makeReservationUseCase: MakeReservationUseCase, room: RoomHotel, checkIn: Date, checkOut: Date) {
         self.makeReservationUseCase = makeReservationUseCase
         self.room = room
         self.checkIn = checkIn

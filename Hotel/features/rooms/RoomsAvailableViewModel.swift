@@ -6,23 +6,24 @@
 //
 
 import Foundation
+
+@MainActor
 class RoomsAvailableViewModel: ObservableObject {
     @Published var rooms: [RoomHotel] = []
     @Published var isLoading: Bool = false
     @Published var showConfirmation: Bool = false
     @Published var selectedRoom: RoomHotel?
 
-    let getRoomsAvailables:GetRoomsAvailables
+    nonisolated(unsafe) let getRoomsAvailables:GetRoomsAvailables
     let checkInDate: Date
     let checkOutDate: Date
     private let guests: Int
 
-    init(source:GetRoomsAvailables, checkIn: Date, checkOut: Date, guests: Int) {
+    nonisolated init(source:GetRoomsAvailables, checkIn: Date, checkOut: Date, guests: Int) {
         self.getRoomsAvailables = source
         self.checkInDate = checkIn
         self.checkOutDate = checkOut
         self.guests = guests
-        loadRooms()
     }
 
     func loadRooms() {

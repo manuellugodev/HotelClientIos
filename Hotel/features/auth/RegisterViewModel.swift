@@ -7,6 +7,7 @@
 
 import Foundation
 
+@MainActor
 class RegisterViewModel: ObservableObject {
     @Published var username: String = ""
     @Published var firstName: String = ""
@@ -29,10 +30,10 @@ class RegisterViewModel: ObservableObject {
     @Published var passwordError: String? = nil
     @Published var confirmPasswordError: String? = nil
 
-    private let registerUseCase: RegisterUserUseCase
-    var onRegisterSuccess: (() -> Void)?
+    nonisolated(unsafe) private let registerUseCase: RegisterUserUseCase
+    nonisolated(unsafe) var onRegisterSuccess: (() -> Void)?
 
-    init(registerUseCase: RegisterUserUseCase) {
+    nonisolated init(registerUseCase: RegisterUserUseCase) {
         self.registerUseCase = registerUseCase
     }
 

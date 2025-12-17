@@ -7,6 +7,7 @@
 
 import Foundation
 
+@MainActor
 class ProfileViewModel:ObservableObject{
     @Published var name: String = ""
     @Published var email: String = ""
@@ -14,11 +15,11 @@ class ProfileViewModel:ObservableObject{
     @Published var showLogoutAlert: Bool = false
     @Published var showLoader = true
     @Published var showError = false
-    private let getProfile:GetProfileUsecase
-    
-    var onLogout: (() -> Void)?
-    
-    init(usecase:GetProfileUsecase) {
+    nonisolated(unsafe) private let getProfile:GetProfileUsecase
+
+    nonisolated(unsafe) var onLogout: (() -> Void)?
+
+    nonisolated init(usecase:GetProfileUsecase) {
         getProfile=usecase
     }
     
